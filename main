@@ -1,0 +1,177 @@
+#include <iostream>
+#include <locale>
+#include <cstdlib>
+#include <fstream>
+
+
+
+using namespace std;
+#include "funcoesGerais.cpp"
+
+
+
+int main() {
+	setlocale (LC_ALL,"");
+	corPadrao(); 
+	
+	ofstream _arquivo_Entrada;
+	ifstream _arquivo_Saida;
+	
+	//Variáveis usadas durante o programa:
+	
+	bool loop_Geral = true; //Esta variável vai manter um loop durante toda a 
+	//execução do programa, quando este loop encerrar, o programa se encerra.
+	
+	int primeiraOpcao;//Armazenar primeira escolha do usuário. 
+	int menuPrincipalOpcao; // Armazenar escolha do usuário no menu principal.
+	int menuCadastroOpcao; // Armazenar escolha do usuário no menu de cadastro.
+	bool primeiroLoop = true; //Menu de boas vindas.
+	bool loop_MenuPrincipal; //Menu principal
+	bool loop_MenuCadastro; //Menu de cadastros
+	bool loop_CriarOrcamento; //Área para criar orçamentos.
+	bool loop_AprovarOrcamento; //Área para aprovar orçamentos.
+	bool loop_Contabilidade; //Área para demonstrar a contabilidade da empresa.
+	
+	//--------------------------------------------------------------------------
+	
+	do{
+		while(primeiroLoop){ 
+			system("cls");
+			menssagemDeBoasVindas(); //Executa uma menssagem inicial.
+		   	cin >> primeiraOpcao;
+			system("cls");
+		
+			switch(primeiraOpcao){
+				case 1:
+					primeiroLoop = false;
+					loop_MenuPrincipal = true;
+					break;
+				case 2:
+					primeiroLoop = false;
+					loop_Geral = false;
+					loop_MenuPrincipal = false;
+					loop_MenuCadastro = false;
+					loop_CriarOrcamento = false;
+					loop_AprovarOrcamento = false;
+					loop_Contabilidade = false;
+					break;
+				default:
+					erro("O número digitado não corresponde a uma opção.");
+					break;
+			}		
+		}
+	
+		
+		while(loop_MenuPrincipal){
+			system("cls");
+			menssagemMenuPrincipal(); //Mostra o menu principal.
+			cin >> menuPrincipalOpcao;
+			system("cls");
+			
+			switch (menuPrincipalOpcao){
+				case 0:
+					loop_Geral = false;
+					loop_MenuPrincipal = false;
+					loop_MenuCadastro = false;
+					loop_CriarOrcamento = false;
+					loop_AprovarOrcamento = false;
+					loop_Contabilidade = false;
+					break;
+				case 1:
+					loop_MenuPrincipal = false;
+					loop_MenuCadastro = true; 
+					loop_CriarOrcamento = false;
+					loop_AprovarOrcamento = false;
+					loop_Contabilidade = false;
+					break;
+				case 2:
+					loop_MenuPrincipal = false;
+					loop_MenuCadastro = false;
+					loop_CriarOrcamento = true;
+					loop_AprovarOrcamento = false;
+					loop_Contabilidade = false;
+					break;
+				case 3:
+					loop_MenuPrincipal = false;
+					loop_MenuCadastro = false;
+					loop_CriarOrcamento = false;
+					loop_AprovarOrcamento = true;
+					loop_Contabilidade = false;
+					break;
+				case 4:
+					loop_MenuPrincipal = false;
+					loop_MenuCadastro = false;
+					loop_CriarOrcamento = false;
+					loop_AprovarOrcamento = false;
+					loop_Contabilidade = true;
+					break;
+				default:
+					erro("O número digitado não corresponde a uma opção.");
+					break;
+			}
+		}
+		
+		while (loop_MenuCadastro){
+			system("cls"); 
+			menssagemMenuCadastro();
+			cin >> menuCadastroOpcao;
+			system("cls");
+			
+			switch(menuCadastroOpcao){
+				case 0:
+					loop_MenuPrincipal = true;
+					loop_MenuCadastro = false;
+					break;
+				case 1:
+					cout << "CADASTRAR CLIENTE" << endl;
+					system("pause");
+					break;
+				case 2: 
+					cout << "CADASTRAR MOTORISTA" << endl;
+					system("pause");
+					break;
+				case 3:
+					cout << "CADASTRAR CAMINHÃO" << endl;
+					system("pause");
+					break;
+				default:
+					erro("O número digitado não corresponde a uma opção.");
+					break;
+			}
+			
+		}
+		
+		while (loop_CriarOrcamento){
+			system("cls");
+			cout << "CRIAR ORÇAMENTO" << endl;
+			system("pause");
+			system("cls");
+			loop_MenuPrincipal = true;
+			loop_MenuCadastro = false;
+			loop_CriarOrcamento = false;
+		}
+		while (loop_AprovarOrcamento){
+			system("cls");
+			cout << "APROVAR ORÇAMENTO" << endl;
+			system("pause");
+			system("cls");
+			loop_MenuPrincipal = true;
+			loop_MenuCadastro = false;
+			loop_AprovarOrcamento = false; 
+		}
+		while (loop_Contabilidade){
+			system("cls");
+			cout << "CONTABILIDADE" << endl;
+			system("pause");
+			system("cls");
+			loop_MenuPrincipal = true;
+			loop_MenuCadastro = false;
+			loop_Contabilidade = false;
+		}
+		
+	}while(loop_Geral);
+
+	
+	cout << "Tchau! Até mais." << endl;
+	return 0;
+}
